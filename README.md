@@ -15,8 +15,8 @@ Jupiter is a full stack system that aims to use personalization to improve event
 ![architecture](https://user-images.githubusercontent.com/31113955/40943643-c04315c0-6806-11e8-80bc-ba6bc700f0cc.png)
 
 ## How does it Work
-The system outputs *nearby events* based on user's id and geo location. If a user has marked an event as *My favorite*, the system would *recommend events* (similar events as the user's favorite) to the user. This content-based recommendation makes the website personalized to each user. If the user is no longer interested in a favorite event, he or she can simply mark it off, and the recommendations from the system would change accordingly.
-Should a user finds an interesting event nearby, he or she may directly click the URL link on Jupiter web-page to *purchase tickets and pick seats*.
+The system outputs **nearby events** based on user's id and geo location. If a user has marked an event as **My favorite**, the system would **recommend events** (similar events as the user's favorite) to the user. This content-based recommendation makes the website personalized to each user. If the user is no longer interested in a favorite event, he or she can simply mark it off, and the recommendations from the system would change accordingly.
+Should a user finds an interesting event nearby, he or she may directly click the URL link on Jupiter web-page to **purchase tickets and pick seats**.
 
 **The Frontend Web-page**:
 ![frontend](https://user-images.githubusercontent.com/31113955/40945762-2760dc30-680f-11e8-836a-91ff9354ad07.png)
