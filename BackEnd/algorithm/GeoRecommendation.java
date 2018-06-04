@@ -39,17 +39,17 @@ public class GeoRecommendation {
 		Collections.sort(categoryList, new Comparator<Entry<String, Integer>>() {
 			@Override
 			public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
-				return Integer.compare(o2.getValue(), o1.getValue()); //降序
+				return Integer.compare(o2.getValue(), o1.getValue());
 			}
 		});
 		
 		// Step 3, do search based on category, filter out favorited events, sort by
 		// distance
-		Set<Item> visitedItems = new HashSet<>();  //用户favorite过的event就不再推荐了。
+		Set<Item> visitedItems = new HashSet<>(); 
 		
 		for (Entry<String, Integer> category : categoryList) {
 			List<Item> items = conn.searchItems(lat, lon, category.getKey()); // Connect to TicketMaster API and get items, and save into DB
-			List<Item> filteredItems = new ArrayList<>();   //无重项，且用户都没有访问过的内容
+			List<Item> filteredItems = new ArrayList<>();
 			for (Item item : items) {
 				if (!favoriteItemIds.contains(item.getItemId()) && !visitedItems.contains(item)) {
 					filteredItems.add(item);
@@ -59,7 +59,7 @@ public class GeoRecommendation {
 			Collections.sort(filteredItems, new Comparator<Item>() {
 				@Override
 				public int compare(Item item1, Item item2) {
-					return Double.compare(item1.getDistance(), item2.getDistance());  //升序
+					return Double.compare(item1.getDistance(), item2.getDistance());
 				}
 			});
 			
