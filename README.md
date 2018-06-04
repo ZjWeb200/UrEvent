@@ -1,1 +1,1 @@
-# Full-Stack-Event-Recommendation
+# Event Recommendation
