@@ -7,4 +7,4 @@ Front end: Interactive web page for users to search events and purchase tickets 
 
 Back end: Java Apache Tomcat server with MySQL RDMS and live on Amazon EC2
 
-![Alt text]("Framework.png")
+![Alt text]("https://github.com/ZJZheng/Full-Stack-Event-Recommendation/blob/master/Framework.png")
