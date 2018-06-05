@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
 
-// This class is only used to reset the tables in the db. 单独运行。有自己的main function。
+// This class is only used to reset the tables in the db.
 public class MySQLTableCreation {
 	// Run this as Java application to reset db schema.
 	public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class MySQLTableCreation {
 			// Step 1 Connect to MySQL.
 			try {
 				System.out.println("Connecting to " + MySQLDBUtil.URL);
-				Class.forName("com.mysql.jdbc.Driver").getConstructor().newInstance(); // register一个JDBC的driver
+				Class.forName("com.mysql.jdbc.Driver").getConstructor().newInstance(); // register JDBC driver
 				
 				// Attempts to establish a connection to the given database URL. The
 				// DriverManager attempts to select an appropriate driver from the set of
@@ -54,7 +54,6 @@ public class MySQLTableCreation {
 					+ "PRIMARY KEY (item_id))";
 			stmt.executeUpdate(sql);
 			
-			// item 与 categories为多对多的关系，故把categories单独存为一个关系表。
 			sql = "CREATE TABLE categories (" + "item_id VARCHAR(255) NOT NULL," + "category VARCHAR(255) NOT NULL,"
 					+ "PRIMARY KEY (item_id, category)," + "FOREIGN KEY (item_id) REFERENCES items(item_id))";
 			stmt.executeUpdate(sql);
