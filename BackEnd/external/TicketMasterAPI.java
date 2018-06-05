@@ -226,7 +226,7 @@ public class TicketMasterAPI {
 		return new ArrayList<>();
 	}
 
-	// Helper. for tesing
+	// Helper. for testing
 	private void queryAPI(double lat, double lon) {
 		List<Item> events = search(lat, lon, null);
 		try {
