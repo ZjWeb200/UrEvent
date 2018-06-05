@@ -3,7 +3,7 @@ package db.mysql;
 // db.mysql package contains mysql version of DBConnection implementation
 public class MySQLDBUtil {
 	private static final String HOSTNAME = "localhost";
-	private static final String PORT_NUM = "3306"; // change it to your mysql port number
+	private static final String PORT_NUM = "3306"; // mysql port number
 	public static final String DB_NAME = "laiproject";
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "root";
