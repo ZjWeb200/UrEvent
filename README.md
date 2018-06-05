@@ -1,4 +1,4 @@
-# Jupiter: Event Search and Recommendation System
+# Jupiter: Event Search and Recommendation
 ## Overview
 
 Many of us may wish to participate fun events on weekends, such as watching a soccer game or going to a concert. However, we may not know which events are available in the near future, their locations or where to purchase tickets.
