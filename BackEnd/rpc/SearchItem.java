@@ -2,7 +2,6 @@ package rpc;
 
 import java.io.IOException;
 import java.util.ArrayList;
-//import java.io.PrintWriter;
 import java.util.List;
 import java.util.Set;
 
@@ -39,7 +38,6 @@ public class SearchItem extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 在前端浏览器里输入的url，传过来之后，将用户输入的lat, lon, term存储。
 		String userId = request.getParameter("user_id");
 		double lat = Double.parseDouble(request.getParameter("lat"));
 		double lon = Double.parseDouble(request.getParameter("lon"));
@@ -47,7 +45,7 @@ public class SearchItem extends HttpServlet {
 		String term = request.getParameter("term");
 
 		DBConnection conn = DBConnectionFactory.getConnection();
-		List<Item> items = conn.searchItems(lat, lon, term); // 同时把这些items存入了database中。
+		List<Item> items = conn.searchItems(lat, lon, term); 
 
 		Set<String> favorite = conn.getFavoriteItemIds(userId);
 		conn.close();
@@ -67,10 +65,7 @@ public class SearchItem extends HttpServlet {
 			e.printStackTrace();
 		}
 		JSONArray array = new JSONArray(list);
-		
-		// 将 array response回前端浏览器
 		RpcHelper.writeJsonArray(response, array);
-
 	}
 
 	/**
@@ -79,7 +74,6 @@ public class SearchItem extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
