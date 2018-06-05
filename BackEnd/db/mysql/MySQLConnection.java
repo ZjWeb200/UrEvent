@@ -40,7 +40,7 @@ public class MySQLConnection implements DBConnection {
 		}
 	}
 	
-	// favorites 存入 db 中的history 表中
+	// save favorites into history table of db
 	@Override
 	public void setFavoriteItems(String userId, List<String> itemIds) {
 		if (conn == null) {
@@ -48,7 +48,7 @@ public class MySQLConnection implements DBConnection {
 		}
 		
 		try {
-			// history表 有三个attributes，此处只设置前两个。
+			// set the first two attributes of history table
 			String sql = "INSERT IGNORE INTO history (user_id, item_id) VALUES (?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			for (String itemId : itemIds) {
@@ -114,7 +114,7 @@ public class MySQLConnection implements DBConnection {
 		Set<String> itemIds = getFavoriteItemIds(userId);
 		
 		try {
-			String sql = "SELECT * FROM items WHERE item_id = ?"; // * 取 items table中的所有 columns。 用 where 提取 item_id column
+			String sql = "SELECT * FROM items WHERE item_id = ?"; 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			for (String itemId: itemIds) {
 				 stmt.setString(1, itemId);
@@ -132,7 +132,7 @@ public class MySQLConnection implements DBConnection {
 					 builder.setDistance(rs.getDouble("distance"));
 					 builder.setRating(rs.getDouble("rating"));
 					 
-					 favoriteItems.add(builder.build()); // 根据 itemId创建一个我们自己定义的item object然后存入favorite itmes set
+					 favoriteItems.add(builder.build()); 
 				 }
 			}
 			
@@ -143,7 +143,7 @@ public class MySQLConnection implements DBConnection {
 		return favoriteItems;
 	}
 
-	//根据 itemId获得该item的categories
+	//get item categories according to itemId
 	@Override
 	public Set<String> getCategories(String itemId) {
 		if (conn == null) {
@@ -182,11 +182,8 @@ public class MySQLConnection implements DBConnection {
 		}
 		try {
 			// Use PreparedStatement to avoid SQL injection
-			// 还可以用 preparedstatement 循环插入多个items，template固定了。
-			//items有7项，故7个问号
-			String sql = "INSERT IGNORE INTO items VALUES(?, ?, ?, ?, ?, ?, ?)";  // 不可插入重复的primary key
+			String sql = "INSERT IGNORE INTO items VALUES(?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			// set 上面的问号
 			stmt.setString(1, item.getItemId());
 			stmt.setString(2, item.getName());
 			stmt.setDouble(3, item.getRating());
@@ -196,7 +193,6 @@ public class MySQLConnection implements DBConnection {
 			stmt.setDouble(7, item.getDistance());
 			stmt.execute();
 			
-			//把每个item的categories存入categories关系表
 			sql = "INSERT IGNORE INTO categories VALUES (?, ?)";
 			stmt = conn.prepareStatement(sql);
 			for (String category : item.getCategories()) {
