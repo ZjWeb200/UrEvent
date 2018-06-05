@@ -31,7 +31,6 @@ public class ItemHistory extends HttpServlet {
      */
     public ItemHistory() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -39,17 +38,17 @@ public class ItemHistory extends HttpServlet {
 	 */
     // Get user's favorite items according to front-end url.
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("user_id"); //从url中提取user_id部分
+		String userId = request.getParameter("user_id"); //get user_id from the URL
 		JSONArray array = new JSONArray();
 		
-		DBConnection conn = DBConnectionFactory.getConnection(); //建立与数据库的连接。必不可少！下面都是调用该connection的方法。
+		DBConnection conn = DBConnectionFactory.getConnection(); // initialize connection with the database
 		Set<Item> items = conn.getFavoriteItems(userId);
 		
 		for (Item item : items) {
 			JSONObject obj = item.toJSONObject();
 			
 			try {
-				obj.append("favorite", true); //为前端服务
+				obj.append("favorite", true);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
