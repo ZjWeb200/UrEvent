@@ -5,7 +5,6 @@ import java.util.Set;
 
 import entity.Item;
 
-// An interface, 需要不同的database来implement.
 public interface DBConnection {
 	/**
 	 * Close the connection.
