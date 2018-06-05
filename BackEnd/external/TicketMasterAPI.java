@@ -50,7 +50,6 @@ public class TicketMasterAPI {
 	// ...
 	// }
 
-	// address 在 _embedded, venues下.最终地址要 具体地址+城市
 	private String getAddress(JSONObject event) throws JSONException {
 		if (!event.isNull("_embedded")) {
 			JSONObject embedded = event.getJSONObject("_embedded");
@@ -58,7 +57,6 @@ public class TicketMasterAPI {
 			if (!embedded.isNull("venues")) {
 				JSONArray venues = embedded.getJSONArray("venues");
 
-				// 此处只care第一个主要address。 第一个有可能为空，而第二个不为空，故用for loop找第一个非空的。
 				for (int i = 0; i < venues.length(); i++) {
 					JSONObject venue = venues.getJSONObject(i);
 
@@ -101,7 +99,6 @@ public class TicketMasterAPI {
 		if (!event.isNull("images")) {
 			JSONArray images = event.getJSONArray("images");
 
-			// 也只关注第一个url (public url of the image)
 			for (int i = 0; i < images.length(); i++) {
 				JSONObject image = images.getJSONObject(i);
 
@@ -115,16 +112,14 @@ public class TicketMasterAPI {
 
 	// {"classifications" : [{"segment": {"name": "music"}}, ...]}
 	private Set<String> getCategories(JSONObject event) throws JSONException {
-		// 支持多个tag,可以通过多个categories搜索到该event。
 		Set<String> categories = new HashSet<>();
 		if (!event.isNull("classifications")) {
 			JSONArray classifications = event.getJSONArray("classifications");
 			for (int i = 0; i < classifications.length(); i++) {
 				JSONObject classification = classifications.getJSONObject(i);
 				if (!classification.isNull("segment")) {
-					JSONObject segment = classification.getJSONObject("segment"); // segment is a primary genre for an
-																					// entity (Music, Sports, etc.)
-
+					//segment is a primary genre for an entity (Music, Sports, etc.)
+					JSONObject segment = classification.getJSONObject("segment"); 
 					if (!segment.isNull("name")) {
 						String name = segment.getString("name");
 						categories.add(name);
@@ -143,8 +138,7 @@ public class TicketMasterAPI {
 			JSONObject event = events.getJSONObject(i);
 
 			ItemBuilder builder = new ItemBuilder();
-			// 以下5个都在TicketMaster Response structure _embedded events下的第一层
-			if (!event.isNull("name")) { // 检测key是否存在
+			if (!event.isNull("name")) {
 				builder.setName(event.getString("name"));
 			}
 			if (!event.isNull("id")) {
@@ -171,12 +165,12 @@ public class TicketMasterAPI {
 	// The function which actually sends HTTP request and get response with
 	// TicketMaster API
 	public List<Item> search(double lat, double lon, String keyword) {
-		// if no specific keyword, 用 default即可
+		// if no specific keyword
 		if (keyword == null) {
 			keyword = DEFAULT_KEYWORD;
 		}
 
-		// Encode keyword, 可能不是ASCII
+		// Encode keyword
 		try {
 			keyword = java.net.URLEncoder.encode(keyword, "UTF-8");
 		} catch (Exception e) {
@@ -192,11 +186,8 @@ public class TicketMasterAPI {
 		// Open a HTTP connection between your Java application and TicketMaster based
 		// on url
 		try {
-			// 创建URL，response由HTTP来支持，故此处生成http的url connection.
-			// 此connection连接java application和ticket master API.
 			HttpURLConnection connection = (HttpURLConnection) new URL(URL + "?" + query).openConnection();
 
-			// Set request method to GET. 这一句不写也可以，因为default method就是GET.
 			connection.setRequestMethod("GET");
 
 			// Send request to TicketMaster and get response, response code could be
@@ -204,12 +195,6 @@ public class TicketMasterAPI {
 			// response body is saved in InputStream of connection.
 			// 200 - ok; 404 - file not found
 			int responseCode = connection.getResponseCode();
-
-			/*
-			 * 如果request失败，做其他处理 if (responseCode != 200) {
-			 * 
-			 * }
-			 */
 
 			// debug
 			System.out.println("\nSending 'GET' request to URL: " + URL + "?" + query);
@@ -219,20 +204,18 @@ public class TicketMasterAPI {
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String inputline;
 			StringBuilder response = new StringBuilder();
-			// 一行一行read in data.
+			// Read in data line by line.
 			while ((inputline = in.readLine()) != null) {
 				response.append(inputline);
 			}
 			in.close(); // close buffered reader
 			connection.disconnect();
-
-			// 将读取的string转化为JSON
+			
 			JSONObject obj = new JSONObject(response.toString());
-			// 判断response structure 里的 _embedded是否存在，数据都在它里面
 			if (obj.isNull("_embedded")) {
 				return new ArrayList<>();
 			}
-			// we want _embedded 里面的 events array
+			// we want _embedded's events array
 			JSONObject embedded = obj.getJSONObject("_embedded");
 			JSONArray events = embedded.getJSONArray("events");
 			return getItemList(events);
@@ -240,11 +223,10 @@ public class TicketMasterAPI {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// 最后如果try没进入说明有异常，返回一个空的ArrayList即可
 		return new ArrayList<>();
 	}
 
-	// Helper. 用于 debug
+	// Helper. for tesing
 	private void queryAPI(double lat, double lon) {
 		List<Item> events = search(lat, lon, null);
 		try {
