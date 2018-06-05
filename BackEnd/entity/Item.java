@@ -6,9 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-// 每个event 为一个item.我们的project只关注每个event的一些 parameters
 // Parse and clean event array to only save data we want.
-// Item的object是整个project描述一个event的java object。它可以转存为database里面的table。
 public class Item {
 	@Override
 	public int hashCode() {
@@ -59,7 +57,7 @@ public class Item {
 		this.distance = builder.distance;
 	}
 
-	// JSON Object，因为frontend code只理解JSON 格式
+	// Convert to JSON Object
 	public JSONObject toJSONObject() {
 		JSONObject obj = new JSONObject();
 		try {
@@ -109,8 +107,7 @@ public class Item {
 		return distance;
 	}
 
-	// 必须 static， 否则必须用Item 的 instance来调用ItemBuilder。
-	// 但是 Item 的 instance 必须由ItemBuilder来创建。死循环。
+	// Builder Pattern
 	public static class ItemBuilder {
 		private String itemId;
 		private String name;
@@ -161,16 +158,8 @@ public class Item {
 			return this;
 		}
 
-		// 用于创建Item instance. this 指 ItemBuilder.
 		public Item build() {
 			return new Item(this);
 		}
 	}
-
-	// public static void main(String[] args) {
-	// 创建 Item (Builder Pattern) 的一个 instance
-	// Item oneitem = new
-	// Item.ItemBuilder().setAddress("abc").setName("1234").build();
-	// }
-
 }
