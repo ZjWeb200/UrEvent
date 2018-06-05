@@ -2,8 +2,7 @@ package db;
 
 import db.mysql.MySQLConnection;
 
-//方便转换数据库
-//use it to create different db instances.
+//use it to create different db connection instances.
 public class DBConnectionFactory {
 	// This should change based on the pipeline.
 	private static final String DEFAULT_DB = "mysql";
