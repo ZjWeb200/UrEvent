@@ -15,10 +15,10 @@ Jupiter is a full stack web service that aims to use personalization to improve 
 ![architecture](https://user-images.githubusercontent.com/31113955/40943643-c04315c0-6806-11e8-80bc-ba6bc700f0cc.png)
 
 ## How does it Work
-The system outputs **nearby events** based on user's id and geo location. If a user has marked an event as **My favorite**, the system would **recommend events** (similar events as the user's favorite) to the user. This content-based recommendation makes the website personalized to each user. If the user is no longer interested in a favorite event, he or she can simply mark it off, and the recommendations from the system would change accordingly.
-Should a user finds an interesting event nearby, he or she may directly click the URL link on Jupiter web-page to **purchase tickets and pick seats**.
+The web service searches **nearby events** based on user's id and geo location. If a user has marked an event as **My favorite**, the system would also **recommend events** (similar events to the user's favorite) to the user. This content-based recommendation makes the website personalized to each user. If the user is no longer interested in a favorited event, he or she can simply mark it off, and the recommendations from the backend would change accordingly.
+Should a user finds an interesting event nearby, he or she may directly click the URL link on the frontend web-page to **purchase tickets and pick seats**.
 
 **The Frontend Web-page**:
 ![frontend](https://user-images.githubusercontent.com/31113955/40945762-2760dc30-680f-11e8-836a-91ff9354ad07.png)
 
-At the backend, since it's a RESTful web service, rpc operations are directly based on HTTP methods. The Tomcat server uses HTTP URL to indicate which service (corresponding Java servlet) and data (corresponding table/content from MySQL RDMS) a client requests/posts. TicketMaster API connecting to the web server is used as a "pool" for event searching and tickets purchasing.
+At the backend, since it deploys RESTful APIs, rpc (remote procedure call) operations are directly based on HTTP methods. The Tomcat server uses HTTP URL to indicate which service (corresponding Java servlet) and data (corresponding table/content from MySQL RDMS) a client requests/posts. TicketMaster API connecting to the web server is used as a "pool" for event searching and tickets purchasing.
