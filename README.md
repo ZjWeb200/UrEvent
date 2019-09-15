@@ -1,8 +1,8 @@
-# Jupiter: Event Search and Recommendation
+# UrEvent: Event Search and Recommendation
 ## Overview
 
 Many of us may wish to participate fun events on weekends, such as watching a soccer game or going to a concert. However, we may not know which events are available in the near future, their locations or where to purchase tickets.
-Jupiter is a full stack web service that aims to use personalization to improve event search and recommendation.
+UrEvent is a full stack web service that aims to use personalization to improve event search and recommendation.
 
 **Front end**: Interactive web page for users to search events and purchase tickets utilizing AJAX technology
 
