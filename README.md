@@ -19,6 +19,6 @@ The web service searches **nearby events** based on user's id and geo location. 
 Should a user finds an interesting event nearby, he or she may directly click the URL link on the frontend web-page to **purchase tickets and pick seats**.
 
 **The Frontend Web-page**:
-![frontend](https://user-images.githubusercontent.com/31113955/40945762-2760dc30-680f-11e8-836a-91ff9354ad07.png)
+![frontend](https://github.com/ZjWeb200/UrEvent/blob/master/frontend.JPG)
 
 At the backend, since it deploys RESTful APIs, rpc (remote procedure call) operations are directly based on HTTP methods. The Tomcat server uses HTTP URL to indicate which service (corresponding Java servlet) and data (corresponding table/content from MySQL RDMS) a client requests/posts. TicketMaster API connecting to the web server is used as a "pool" for event searching and tickets purchasing.
