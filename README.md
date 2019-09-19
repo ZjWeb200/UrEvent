@@ -9,7 +9,7 @@ UrEvent is a full stack web service that aims to use personalization to improve 
 **Back end**: Java servlets with RESTful APIs based on Apache Tomcat Server plus MySQL RDMS and live on Amazon EC2
 
 **The Big Picture**:  
-![framework](https://user-images.githubusercontent.com/31113955/40943470-166d7324-6806-11e8-84dd-4e16f31614f0.png)
+![framework](https://github.com/ZjWeb200/UrEvent/blob/master/logic.png)
 
 **The Inner Logic**:
 ![architecture](https://user-images.githubusercontent.com/31113955/40943643-c04315c0-6806-11e8-80bc-ba6bc700f0cc.png)
