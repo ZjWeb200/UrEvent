@@ -23,6 +23,3 @@ Should a user finds an interesting event nearby, he or she may directly click th
 ![frontend](https://github.com/ZjWeb200/UrEvent/blob/master/frontend.JPG)
 
 At the backend, since it deploys RESTful APIs, rpc (remote procedure call) operations are directly based on HTTP methods. The Tomcat server uses HTTP URL to indicate which service (corresponding Java servlet) and data (corresponding table/content from MySQL RDMS) a client requests/posts. TicketMaster API connecting to the web server is used as a "pool" for event searching and tickets purchasing.
-
-## Website link
-http://54.219.160.64/UrEvent/
